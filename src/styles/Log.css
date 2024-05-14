@@ -1,0 +1,139 @@
+div {
+  display: flex;
+  flex-direction: column; /* Cambia la dirección del flex a columna */
+  align-items: center;
+  justify-content: center;
+  margin-left: auto; /* Centra el contenedor horizontalmente */
+  margin-right: auto; /* Centra el contenedor horizontalmente */
+  max-width: 600px; /* Ancho máximo del contenedor */
+  
+}
+
+body{
+  background-color: gray;
+}
+
+h1 {
+  text-align: center;
+  font-size: 60px;
+  color: black;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+.texto-arriba br {
+  display: none; /* Esto ocultará completamente el salto de línea */
+}
+.destacado {
+  color: rgb(15, 87, 138); /* Cambia el color según tus preferencias */
+}
+
+form{
+  display: flex;
+      text-align: center;
+      flex-direction: column;
+      align-items: center; 
+  }
+
+  
+input {
+      background-color: rgb(201, 213, 221);
+      border-radius: 30px;
+      margin-left: 10px;
+      border-color: slategray;
+      width: 90%;
+      padding: 5px;
+      border-width: 0px;
+      margin-bottom: 30px;
+      color: black;
+      align-items: center;
+      
+  }
+  
+  input:hover:hover {
+      outline: 1px solid rgb(21, 124, 228);
+      box-shadow: 0 0 20px rgb(21, 124, 228);
+  }
+
+    
+button {
+  background-color: rgb(71, 93, 192);
+  border-radius: 30px;
+  border-color: slategray;
+  width: 50%;
+  padding: 15px;
+  border-width: 0px;
+  margin-bottom: 20px;
+  color: white;
+  margin-top: 10px;
+}
+
+.boton-enviar{
+background-color: rgb(71, 93, 192);
+border-radius: 30px;
+border-color: slategray;
+width: 50%;
+padding: 15px;
+border-width: 0px;
+margin-bottom: 20px;
+color: white;
+margin-top: 10px;
+}
+
+.boton-enviar:hover {
+background-color: rgb(21, 124, 228);
+outline: 1px solid rgb(21, 124, 228);
+box-shadow: 0 0 20px rgb(21, 124, 228);
+}
+
+button:hover {
+  background-color: rgb(21, 124, 228);
+  outline: 1px solid rgb(21, 124, 228);
+  box-shadow: 0 0 20px rgb(21, 124, 228);
+}
+
+  
+
+label {
+  background-color: #cccccc40;
+  border-radius: 30px;
+  border-color: slategray;
+  width: 500px;
+  padding: 5px;
+  border-width: 0px;
+  margin-bottom: 20px;
+  display: flex; /* Agrega display:flex para que flex-direction funcione */
+  flex-direction: column; /* Cambia la dirección del flex a columna */
+  align-items: center; /* Centra verticalmente el contenido */
+  justify-content: center; /* Centra horizontalmente el contenido */
+  box-sizing: border-box; /* Para incluir el padding en el ancho total */
+}
+
+.texto{
+  margin-top: 30px;
+  font-size: 20px;
+  color: black;
+  align-items: center;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+
+.rol{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centra horizontalmente */
+  align-items: center; /* Centra verticalmente el contenido */
+}
+
+select {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  width: 80%;
+  display: flex;
+
+}
+
+
+
+
