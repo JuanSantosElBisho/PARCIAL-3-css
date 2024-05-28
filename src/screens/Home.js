@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { getFirestore, collection, getDocs, updateDoc, doc, arrayUnion, increment } from 'firebase/firestore';
+import { getFirestore, collection, getDocs, doc, arrayUnion, increment, updateDoc, getDoc } from 'firebase/firestore'; // Asegúrate de incluir getDoc aquí
 import AdminView from '../components/AdminView';
 import UserView from '../components/UserView';
 import firebaseApp from '../firebase/credenciales';
@@ -27,60 +27,65 @@ function Home({ user }) {
 
     fetchTorneos();
   }, []);
-
   useEffect(() => {
     const fetchTorneosRegistrados = async () => {
-      try {
+      if (user) {
         const usuarioRef = doc(firestore, 'usuarios', user.uid);
-        const usuarioDoc = await getDocs(usuarioRef);
+        const usuarioDoc = await getDoc(usuarioRef);
         if (usuarioDoc.exists()) {
           const data = usuarioDoc.data();
           if (data && data.torneosRegistrados) {
             setTorneosRegistrados(data.torneosRegistrados);
           }
         }
-      } catch (error) {
-        console.error('Error al obtener los torneos registrados del usuario:', error);
       }
     };
-
-    if (user) {
-      fetchTorneosRegistrados();
-    }
+  
+    fetchTorneosRegistrados();
   }, [user]);
-
-  const handleRegistroTorneo = async (torneoId) => {
+  
+  // Función para actualizar los torneos registrados en Firestore
+  const updateTorneosRegistradosFirestore = async (torneosRegistrados) => {
     try {
-      if (torneosRegistrados.includes(torneoId)) {
-        alert('¡Ya estás registrado en este torneo!');
-        return;
-      }
-
-      const torneoRef = doc(firestore, 'torneos', torneoId);
-      await updateDoc(torneoRef, {
-        participantesRegistrados: increment(1)
-      });
-
       const usuarioRef = doc(firestore, 'usuarios', user.uid);
       await updateDoc(usuarioRef, {
-        torneosRegistrados: arrayUnion(torneoId)
+        torneosRegistrados: torneosRegistrados
       });
-
-      console.log(`Usuario ${user.uid} registrado en el torneo ${torneoId}`);
-      alert('¡Te has registrado en el torneo exitosamente!');
-
-      setTorneos((prevTorneos) => 
-        prevTorneos.map((torneo) =>
-          torneo.id === torneoId
-            ? { ...torneo, participantesRegistrados: torneo.participantesRegistrados + 1 }
-            : torneo
-        )
-      );
-
-      setTorneosRegistrados((prevRegistrados) => [...prevRegistrados, torneoId]);
     } catch (error) {
-      console.error('Error al registrar al usuario en el torneo:', error);
+      console.error('Error al actualizar torneos registrados en Firestore:', error);
     }
+  };
+  
+  const handleRegistroTorneo = async (torneoId) => {
+    if (torneosRegistrados.includes(torneoId)) {
+      alert('¡Ya estás registrado en este torneo!');
+      return;
+    }
+  
+    // Actualizar localmente
+    setTorneosRegistrados(prev => [...prev, torneoId]);
+    // Actualizar en Firestore
+    await updateTorneosRegistradosFirestore([...torneosRegistrados, torneoId]);
+  
+  
+    const torneoRef = doc(firestore, 'torneos', torneoId);
+    await updateDoc(torneoRef, {
+      participantesRegistrados: increment(1)
+    });
+  
+    const usuarioRef = doc(firestore, 'usuarios', user.uid);
+    await updateDoc(usuarioRef, {
+      torneosRegistrados: arrayUnion(torneoId)
+    });
+  
+    alert('¡Te has registrado en el torneo exitosamente!');
+  
+    setTorneosRegistrados(prev => [...prev, torneoId]);
+    setTorneos(prevTorneos =>
+      prevTorneos.map(torneo =>
+        torneo.id === torneoId ? {...torneo, participantesRegistrados: torneo.participantesRegistrados + 1} : torneo
+      )
+    );
   };
 
   const toggleSidebar = () => {

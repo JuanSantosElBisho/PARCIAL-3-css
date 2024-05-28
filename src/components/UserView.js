@@ -24,16 +24,8 @@ function UserView({ torneosIniciales = [], torneosRegistrados = [], onRegistroTo
   };
 
   const handleRegistroTorneo = (torneoId) => {
-    onRegistroTorneo(torneoId);
+       onRegistroTorneo(torneoId);
     setRegistrados((prevRegistrados) => [...prevRegistrados, torneoId]);
-
-    setTorneos((prevTorneos) =>
-      prevTorneos.map((torneo) =>
-        torneo.id === torneoId
-          ? { ...torneo, participantesRegistrados: torneo.participantesRegistrados + 1 }
-          : torneo
-      )
-    );
   };
 
   return (
@@ -127,3 +119,4 @@ function UserView({ torneosIniciales = [], torneosRegistrados = [], onRegistroTo
 }
 
 export default UserView;
+
