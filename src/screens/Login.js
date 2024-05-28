@@ -8,6 +8,7 @@ import {
 } from "firebase/auth";
 import { getFirestore, doc, setDoc } from "firebase/firestore";
 import Advertencias from "../components/Advertencias";
+import tenisImage from "../img/tenis.png";
 
 const auth = getAuth(firebaseApp);
 
@@ -74,12 +75,13 @@ function Login() {
   }
 
   return (
-    <div>
+    <div className="prime">
       <h1>{isRegistrando ? <div className='texto-arriba'>
-                <span className="destacado">REGÍSTRATE</span> 
-                <br/> EN LA MEJOR PAGINA PARA TORNEOS DE GOLF </div>: <div className='texto-arriba'>
-                <span className="destacado">INICIA SESIÓN</span> 
-                <br/> EN LA MEJOR PAGINA PARA TORNEOS DE GOLF </div>}</h1>
+                <span className="destacado">TenisCamps</span> 
+                <br/>  REGISTRATE EN LA MEJOR <br/>PAGINA PARA TORNEOS DE TENIS </div>: <div className='texto-arriba'>
+                <span className="destacado">TenisCamps</span> 
+                
+                <br/> INICIA SESION EN LA MEJOR PAGINA PARA TORNEOS DE TENIS </div>}</h1>
 
       {feedback && <p>{feedback}</p>} {/* Mostrar feedback si está definido */}
 
@@ -112,7 +114,7 @@ function Login() {
         />
       </form>
 
-      <button onClick={() => setIsRegistrando(!isRegistrando)}>
+      <button className="boton" onClick={() => setIsRegistrando(!isRegistrando)}>
         {isRegistrando ? "Ya tengo una cuenta" : "Quiero registrarme"}
       </button>
     </div>

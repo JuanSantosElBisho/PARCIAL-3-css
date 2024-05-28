@@ -7,12 +7,14 @@ import { getAuth, signOut } from 'firebase/auth';
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/firestore';
 
+
 const auth = getAuth(firebaseApp);
 const firestore = getFirestore(firebaseApp);
 
 function Home({ user }) {
   const [torneos, setTorneos] = useState([]);
   const [torneosRegistrados, setTorneosRegistrados] = useState([]);
+  const [isSidebarOpen, setSidebarOpen] = useState(false); // Nuevo estado para controlar la visibilidad del panel
 
   useEffect(() => {
     const fetchTorneos = async () => {
@@ -79,10 +81,23 @@ function Home({ user }) {
     }
   };
 
+  // Función para alternar la visibilidad del panel desplegable
+  const toggleSidebar = () => {
+    setSidebarOpen(!isSidebarOpen);
+  };
+
   return (
-    <div>
-      <h1>Home</h1>
-      <button onClick={() => signOut(auth)}>Cerrar sesión</button>
+    <div className='registrados'>
+      <header>
+        {/* Botón para abrir el panel desplegable */}
+        <button onClick={toggleSidebar}>Torneos Registrados</button>
+      </header>
+      {/* Panel desplegable */}
+      <div className={`sidebar ${isSidebarOpen ? 'open' : ''}`}>
+        <h2>Torneos Registrados</h2>
+        {/* Lista de torneos registrados u otro contenido del panel */}
+      </div>
+      {/* Contenido principal de la página */}
       {user.rol === 'admin' ? <AdminView /> : <UserView torneos={torneos} torneosRegistrados={torneosRegistrados} onRegistroTorneo={handleRegistroTorneo} />}
     </div>
   );

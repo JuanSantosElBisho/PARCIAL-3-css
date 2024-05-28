@@ -1,48 +1,206 @@
-div {
+.navbar {
+  background-color: white;
+  color: black;
+  padding: 20px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title-and-image {
+  display: flex;
+  align-items: center;
+}
+
+
+
+
+
+.simbol {
+  width: 50px; /* Ajusta el tamaño de la imagen según sea necesario */
+  height: auto;
+  margin-right: 100px; 
+}
+
+
+
+.navbar button {
+  background-color:  #f0f0f0;
+  border-radius: 30px;
+  width: 150px;
+  padding: 15px;
+  border-width: 0px;
+  margin-bottom: 20px;
+  color: black;
+  margin-top: 10px;
+  height: 80px;
+  margin-right: -200px; /* Ajusta esta cantidad para controlar el espacio entre los botones */
+}
+.navbar button:last-child {
+  margin-right: 0; /* Elimina el margen derecho del último botón */
+}
+.navbar button:hover{
+  background-color: #e0e0e0; /* Color de fondo al pasar el mouse */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra al pasar el mouse */
+  outline: 2px solid #666; /* Línea alrededor del botón al pasar el mouse */
+}
+
+
+h3 {
+  margin: 0;
+  color: black; /* Cambia el color según tus preferencias */
+  text-align:start;
+  font-size: 60px;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+h2{
+  margin: 0;
+  color: black; /* Cambia el color según tus preferencias */
+  text-align:center;
+  font-size: 30px;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+
+
+
+
+
+.catalogo-torneos {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Tres columnas de igual ancho */
+  gap: 20px; /* Espacio entre los elementos de la cuadrícula */
+  margin: auto; /* Centra el grid horizontalmente */
+  max-width: 1200px; /* Ancho máximo del contenedor, ajusta según necesidad */
+  padding: 20px; /* Padding alrededor del grid para no pegar a los bordes */
+  padding-top: 70px;
+}
+
+.torneo-item {
+font-family: arial;
+  border-radius: 10px ;
+  padding: 20px;
+  background-color: white;
+  display: flex; /* Usamos flexbox dentro de cada torneo para mejor disposición de los elementos */
+  flex-direction: column; /* Elementos en columna dentro de cada caja de torneo */
+  align-items: center; /* Alineación a la izquierda de los contenidos */
+}
+
+.torneo-item img {
+  width: 100%; /* La imagen toma todo el ancho disponible */
+  height: auto; /* Altura automática para mantener la proporción */
+}
+
+.torneo-item div:not(:last-child) {
+  margin-bottom: 10px; /* Añade un margen inferior a cada elemento dentro del torneo-item */
+}
+
+.torneo-item button {
+  margin-top: 10px; /* Añade un margen superior adicional al botón para separarlo más de los datos */
+  width: 100%; /* Hace que el botón ocupe el ancho completo del contenedor */
+}
+
+.torneo-item.registrado {
+  background-color: #6d7376; /* Tono más oscuro de gris */
+}
+
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  right: -3000px; /* Inicialmente oculto */
+  width: 350px; /* Ajusta según necesidad */
+  height: 100%;
+  background: rgb(220, 217, 217);
+  transition: right 0.3s ease; /* Animación suave */
+  z-index: 1200; /* Asegúrate de que esté sobre otros elementos */
+  padding: 20px;
+  overflow-y: auto; /* Permite el desplazamiento vertical */
+}
+
+/* Clase para cuando el sidebar esté visible */
+.sidebar.open {
+  right: 0;
+}
+
+.catalogo-torneos-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Tres columnas de igual ancho */
+  gap: 20px; /* Espacio entre los elementos de la cuadrícula */
+  margin: auto; /* Centra el grid horizontalmente */
+  max-width: 1200px; /* Ancho máximo del contenedor, ajusta según necesidad */
+  padding: 20px; /* Padding alrededor del grid para no pegar a los bordes */
+  padding-top: 20px;
+}
+
+.torneo-item-2 {
+  font-family: arial;
+  border: 1px solid #ccc;
+  padding: 20px;
+  background-color: aliceblue;
+  display: flex; /* Usamos flexbox dentro de cada torneo para mejor disposición de los elementos */
+  flex-direction: column; /* Elementos en columna dentro de cada caja de torneo */
+  align-items: center; /* Alineación a la izquierda de los contenidos */
+  text-align: center; /* Centra el texto */
+}
+
+
+
+.prime{
   display: flex;
   flex-direction: column; /* Cambia la dirección del flex a columna */
   align-items: center;
   justify-content: center;
+  background-color: white;
+  border-radius: 20px;
   margin-left: auto; /* Centra el contenedor horizontalmente */
   margin-right: auto; /* Centra el contenedor horizontalmente */
   max-width: 600px; /* Ancho máximo del contenedor */
-  
 }
 
-body{
-  background-color: gray;
+
+
+body {
+  background-color: rgb(220, 214, 214);
 }
 
 h1 {
   text-align: center;
-  font-size: 60px;
+  font-size: 50px;
   color: black;
   font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+} 
+
+
+
+.destacado {
+  color: rgb(126, 194, 49); /* Cambia el color según tus preferencias */
 }
 
-.texto-arriba br {
-  display: none; /* Esto ocultará completamente el salto de línea */
-}
-.destacado {
-  color: rgb(15, 87, 138); /* Cambia el color según tus preferencias */
-}
 
 form{
   display: flex;
       text-align: center;
       flex-direction: column;
       align-items: center; 
+      
   }
 
   
 input {
-      background-color: rgb(201, 213, 221);
+      background-color: white;
       border-radius: 30px;
       margin-left: 10px;
-      border-color: slategray;
+      border-color: rgb(0, 0, 0);
       width: 90%;
       padding: 5px;
-      border-width: 0px;
+      border-width: 2px;
       margin-bottom: 30px;
       color: black;
       align-items: center;
@@ -50,46 +208,50 @@ input {
   }
   
   input:hover:hover {
-      outline: 1px solid rgb(21, 124, 228);
-      box-shadow: 0 0 20px rgb(21, 124, 228);
+    background-color: #e0e0e0; /* Color de fondo al pasar el mouse */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra al pasar el mouse */
+    outline: 2px solid #666; /* Línea alrededor del botón al pasar el mouse */
   }
+  
+  
 
     
-button {
-  background-color: rgb(71, 93, 192);
+.boton {
+  background-color:  #f0f0f0;
   border-radius: 30px;
-  border-color: slategray;
-  width: 50%;
+  width: 45%;
   padding: 15px;
   border-width: 0px;
   margin-bottom: 20px;
-  color: white;
+  color: black;
   margin-top: 10px;
 }
 
 .boton-enviar{
-background-color: rgb(71, 93, 192);
+background-color:  #f0f0f0;
 border-radius: 30px;
-border-color: slategray;
+border: 2px solid #333; /* Borde gris oscuro */
 width: 50%;
 padding: 15px;
 border-width: 0px;
 margin-bottom: 20px;
-color: white;
+color: black;
 margin-top: 10px;
 }
 
 .boton-enviar:hover {
-background-color: rgb(21, 124, 228);
-outline: 1px solid rgb(21, 124, 228);
-box-shadow: 0 0 20px rgb(21, 124, 228);
+  background-color: #e0e0e0; /* Color de fondo al pasar el mouse */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra al pasar el mouse */
+  outline: 2px solid #666; /* Línea alrededor del botón al pasar el mouse */
 }
 
-button:hover {
-  background-color: rgb(21, 124, 228);
-  outline: 1px solid rgb(21, 124, 228);
-  box-shadow: 0 0 20px rgb(21, 124, 228);
+
+.boton:hover {
+  background-color: #e0e0e0; /* Color de fondo al pasar el mouse */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra al pasar el mouse */
+  outline: 2px solid #666; /* Línea alrededor del botón al pasar el mouse */
 }
+
 
   
 
@@ -134,6 +296,57 @@ select {
 
 }
 
+.crear-torneo {
+  align-items: center;
+  
+  padding-top: 50px; /* Ajusta según sea necesario */
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  max-width: 300px; /* Reduce el ancho máximo del contenedor */
+  margin: 150px auto 0; /* Baja el contenedor 150px desde la parte superior, ajusta según sea necesario */
+  padding: 20px; /* Ajusta el padding interno */
+  background-color: #f9f9f9; /* Color de fondo del contenedor */
+  border-radius: 10px; /* Bordes redondeados */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para dar un efecto de elevación */
+  text-align: center; /* Centra el texto dentro del div */
+}
 
+.crear-torneo form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
+.crear-torneo label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.crear-torneo input {
+  width: 90%;
+  padding: 10px;
+  margin-top: 5px;
+}
+
+.crear-torneo .boton {
+  background-color:  #f0f0f0;
+  border-radius: 30px;
+  width: 200px;
+  color: black;
+  height: 60px
+}
+
+.crear-torneo .boton:hover {
+  background-color: #e0e0e0; /* Color de fondo al pasar el mouse */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra al pasar el mouse */
+  outline: 2px solid #666; /* Línea alrededor del botón al pasar el mouse */
+}
+
+.crear-torneo h3 {
+  margin-bottom: 20px; /* Espacio debajo del título */
+  text-align: center; /* Asegura que el texto esté centrado */
+  font-size: 24px; /* Tamaño de fuente del título */
+}
 

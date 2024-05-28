@@ -32,9 +32,9 @@ function AdminPanel({ onVolver }) {
   };
 
   return (
-    <div>
-      <h2>Crear Torneo</h2>
+    <div className='crear-torneo'>
       <form onSubmit={handleCrearTorneo}>
+      <h3>CREAR TORNEO</h3>
         <label>
           Nombre:
           <input type="text" value={nuevoTorneo.nombre} onChange={(e) => setNuevoTorneo({ ...nuevoTorneo, nombre: e.target.value })} />
@@ -55,9 +55,10 @@ function AdminPanel({ onVolver }) {
           Participantes registrados:
           <input type="number" value={nuevoTorneo.participantesRegistrados} onChange={(e) => setNuevoTorneo({ ...nuevoTorneo, participantesRegistrados: parseInt(e.target.value) })} />
         </label>
-        <button type="submit">Crear Torneo</button>
+        <button className="boton" type="submit">Crear Torneo</button>
+        <button className="boton" onClick={onVolver}>Volver</button>
       </form>
-      <button onClick={onVolver}>Volver</button>
+      
     </div>
   );
 }

@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { getFirestore, collection, getDocs, updateDoc, deleteDoc, doc } from 'firebase/firestore';
 import AdminPanel from '../screens/AdminPanel';
+import { getAuth, signOut } from 'firebase/auth';
 import firebaseApp from '../firebase/credenciales';
+import "../styles/Log.css";
+import tenisImage from "../img/tenis.png";
 
 const firestore = getFirestore(firebaseApp);
+const auth = getAuth(firebaseApp);
 
 function AdminView() {
   const [mostrarFormularioCrear, setMostrarFormularioCrear] = useState(false);
@@ -76,46 +80,58 @@ function AdminView() {
   };
 
   return (
-    <div>
-      {mostrarFormularioCrear ? (
-        <AdminPanel onVolver={() => setMostrarFormularioCrear(false)} />
-      ) : (
-        <div>
-          <h2>Panel de Administración</h2>
-          <button onClick={() => setMostrarFormularioCrear(true)}>Crear Torneo</button>
-          <h3>Torneos existentes:</h3>
-          <ul>
-            {loading ? (
-              <div>Cargando...</div>
-            ) : (
-              torneos.map(torneo => (
-                <li key={torneo.id}>
-                  {editarTorneoId === torneo.id ? (
-                    <div>
-                      <input type="text" name="nombre" value={formularioEdicion.nombre} onChange={handleFormularioEdicionChange} />
-                      <input type="text" name="fechaLimite" value={formularioEdicion.fechaLimite} onChange={handleFormularioEdicionChange} />
-                      <input type="text" name="imagenURL" value={formularioEdicion.imagenURL} onChange={handleFormularioEdicionChange} />
-                      <input type="number" name="maxParticipantes" value={formularioEdicion.maxParticipantes} onChange={handleFormularioEdicionChange} />
-                      <input type="number" name="participantesRegistrados" value={formularioEdicion.participantesRegistrados} onChange={handleFormularioEdicionChange} />
-                      <button onClick={handleGuardarEdicion}>Guardar</button>
-                    </div>
-                  ) : (
-                    <div>
-                      <div>Nombre: {torneo.nombre}</div>
-                      <div>Fecha límite de inscripción: {torneo.fechaLimite}</div>
-                      <img src={torneo.imagenURL} alt="Imagen del torneo" />
-                      <div>Cantidad máxima de participantes: {torneo.maxParticipantes}</div>
-                      <div>Participantes registrados: {torneo.participantesRegistrados}</div>
-                      <button onClick={() => handleEditarTorneo(torneo.id, torneo)}>Editar</button>
-                      <button onClick={() => handleEliminarTorneo(torneo.id)}>Eliminar</button>
-                    </div>
-                  )}
-                </li>
-              ))
-            )}
-          </ul>
+    <div className="container">
+      <div className="navbar">
+        <div className="title-and-image">
+          <h3>
+            <span className="destacado">TenisCamps</span>
+            <img className="simbol" src={tenisImage} alt="Tenis" /> TORNEOS
+            CREADOS
+          </h3>
         </div>
-      )}
+        <button  onClick={() => setMostrarFormularioCrear(true)}>Crear Torneo</button>
+        <button className="bye" onClick={() => signOut(auth)}>Cerrar sesión</button>
+      </div>
+
+      <div className="main-content">
+        {mostrarFormularioCrear ? (
+          <AdminPanel onVolver={() => setMostrarFormularioCrear(false)} />
+        ) : (
+          <div>
+            <h3>TORNEOS CREADOS</h3>
+            <div className="catalogo-torneos">
+              {loading ? (
+                <div>Cargando...</div>
+              ) : (
+                torneos.map(torneo => (
+                  <div className="torneo-item" key={torneo.id}>
+                    {editarTorneoId === torneo.id ? (
+                      <div>
+                        <input type="text" name="nombre" value={formularioEdicion.nombre} onChange={handleFormularioEdicionChange} />
+                        <input type="date" name="fechaLimite" value={formularioEdicion.fechaLimite} onChange={handleFormularioEdicionChange} />
+                        <input type="text" name="imagenURL" value={formularioEdicion.imagenURL} onChange={handleFormularioEdicionChange} />
+                        <input type="number" name="maxParticipantes" value={formularioEdicion.maxParticipantes} onChange={handleFormularioEdicionChange} />
+                        <input type="number" name="participantesRegistrados" value={formularioEdicion.participantesRegistrados} onChange={handleFormularioEdicionChange} />
+                        <button className="boton" onClick={handleGuardarEdicion}>Guardar</button>
+                      </div>
+                    ) : (
+                      <div>
+                        <div><strong>Nombre:</strong> {torneo.nombre}</div>
+                        <div><strong>Fecha límite de inscripción:</strong> {torneo.fechaLimite}</div>
+                        <img src={torneo.imagenURL} alt="Imagen del torneo" />
+                        <div><strong>Cantidad máxima de participantes:</strong> {torneo.maxParticipantes}</div>
+                        <div><strong>Participantes registrados:</strong> {torneo.participantesRegistrados}</div>
+                        <button className="boton" onClick={() => handleEditarTorneo(torneo.id, torneo)}>Editar</button>
+                        <button className="boton" onClick={() => handleEliminarTorneo(torneo.id)}>Eliminar</button>
+                      </div>
+                    )}
+                  </div>
+                ))
+              )}
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 }
