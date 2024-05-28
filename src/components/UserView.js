@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { getAuth, signOut } from "firebase/auth";
 import firebaseApp from "../firebase/credenciales";
 import "../styles/Log.css";
@@ -6,9 +6,14 @@ import tenisImage from "../img/tenis.png";
 
 const auth = getAuth(firebaseApp);
 
-function UserView({ torneos, torneosRegistrados, onRegistroTorneo }) {
+function UserView({ torneosIniciales = [], torneosRegistrados = [], onRegistroTorneo }) {
   const [isSidebarOpen, setSidebarOpen] = useState(false);
   const [registrados, setRegistrados] = useState(torneosRegistrados);
+  const [torneos, setTorneos] = useState(torneosIniciales);
+
+  useEffect(() => {
+    setTorneos(torneosIniciales);
+  }, [torneosIniciales]);
 
   const toggleSidebar = () => {
     setSidebarOpen(!isSidebarOpen);
@@ -21,6 +26,14 @@ function UserView({ torneos, torneosRegistrados, onRegistroTorneo }) {
   const handleRegistroTorneo = (torneoId) => {
     onRegistroTorneo(torneoId);
     setRegistrados((prevRegistrados) => [...prevRegistrados, torneoId]);
+
+    setTorneos((prevTorneos) =>
+      prevTorneos.map((torneo) =>
+        torneo.id === torneoId
+          ? { ...torneo, participantesRegistrados: torneo.participantesRegistrados + 1 }
+          : torneo
+      )
+    );
   };
 
   return (
@@ -35,7 +48,7 @@ function UserView({ torneos, torneosRegistrados, onRegistroTorneo }) {
         </div>
         <button id="toggleButton" onClick={toggleSidebar}>Torneos Registrados</button>
         <button className="bye" onClick={() => signOut(auth)}>Cerrar sesión</button>
-        </div>
+      </div>
       <div className="content">
         <div className={`sidebar ${isSidebarOpen ? "open" : ""}`}>
           <h2>
@@ -54,8 +67,7 @@ function UserView({ torneos, torneosRegistrados, onRegistroTorneo }) {
                 <div>
                   <img
                     src={
-                      torneos.find((torneo) => torneo.id === torneoId)
-                        ?.imagenURL
+                      torneos.find((torneo) => torneo.id === torneoId)?.imagenURL
                     }
                     alt="Imagen del torneo"
                     style={{ width: "100%" }}
@@ -63,10 +75,7 @@ function UserView({ torneos, torneosRegistrados, onRegistroTorneo }) {
                 </div>
                 <div>
                   <strong>Participantes registrados: </strong>
-                  {
-                    torneos.find((torneo) => torneo.id === torneoId)
-                      ?.participantesRegistrados
-                  }
+                  {torneos.find((torneo) => torneo.id === torneoId)?.participantesRegistrados}
                 </div>
               </div>
             ))}
