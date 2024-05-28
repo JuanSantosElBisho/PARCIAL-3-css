@@ -33,13 +33,9 @@ function UserView({ torneos, torneosRegistrados, onRegistroTorneo }) {
             DISPONIBLES
           </h3>
         </div>
-        <button id="toggleButton" onClick={toggleSidebar}>
-          Torneos Registrados
-        </button>
-        <button className="bye" onClick={() => signOut(auth)}>
-          Cerrar sesión
-        </button>
-      </div>
+        <button id="toggleButton" onClick={toggleSidebar}>Torneos Registrados</button>
+        <button className="bye" onClick={() => signOut(auth)}>Cerrar sesión</button>
+        </div>
       <div className="content">
         <div className={`sidebar ${isSidebarOpen ? "open" : ""}`}>
           <h2>

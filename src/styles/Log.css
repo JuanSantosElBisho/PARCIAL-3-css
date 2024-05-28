@@ -27,8 +27,6 @@
   margin-right: 100px; 
 }
 
-
-
 .navbar button {
   background-color:  #f0f0f0;
   border-radius: 30px;
@@ -39,8 +37,10 @@
   color: black;
   margin-top: 10px;
   height: 80px;
-  margin-right: -200px; /* Ajusta esta cantidad para controlar el espacio entre los botones */
+  margin-right: -100px; /* Ajusta esta cantidad para controlar el espacio entre los botones */
 }
+
+
 .navbar button:last-child {
   margin-right: 0; /* Elimina el margen derecho del último botón */
 }
