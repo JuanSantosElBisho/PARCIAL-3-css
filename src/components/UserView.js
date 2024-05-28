@@ -119,4 +119,3 @@ function UserView({ torneosIniciales = [], torneosRegistrados = [], onRegistroTo
 }
 
 export default UserView;
-
