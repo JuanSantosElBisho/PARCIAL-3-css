@@ -29,7 +29,7 @@ function AdminView() {
         const torneosSnapshot = await getDocs(torneosCollection);
         const torneosData = torneosSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
         setTorneos(torneosData);
-        setLoading(false);
+        setLoading(true);
       } catch (error) {
         console.error('Error al obtener los torneos:', error);
       }
